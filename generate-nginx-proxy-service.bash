@@ -3,8 +3,6 @@
 IMAGE_NAME=jwilder/nginx-proxy
 CONTAINER_NAME=nginx-proxy
 
-#SYSD_DIR='/etc/systemd/system'
-SYSD_DIR='./'
 SERVICE_FILE_DEST='nginx-proxy.service'
 
 die ()
@@ -41,7 +39,4 @@ ExecStop=$(which docker) stop -t 2 $CONTAINER_NAME
 WantedBy=local.target
 EOF
 
-mkdir -p "$SYSD_DIR"
-[ -d "$SYSD_DIR" ] || die "systemd directory $SYSD_DIR does not exist!"
-
-echo "$SERVICE_CONTENTS" > ${SYSD_DIR}/${SERVICE_FILE_DEST}
+echo "$SERVICE_CONTENTS" > ${SERVICE_FILE_DEST}

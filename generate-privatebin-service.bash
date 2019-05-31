@@ -4,10 +4,7 @@ IMAGE_NAME=privatebin/nginx-fpm-alpine:1.2.1
 CONTAINER_NAME=privatebin
 DNS_NAME=privatebin.example.com
 LETSENCRYPT_EMAIL=freedomben@example.com
-PORT_NUM=54323 # TODO don't expose any ports to host
 
-#SYSD_DIR='/etc/systemd/system'
-SYSD_DIR='./'
 SERVICE_FILE_DEST='privatebin.service'
 
 die ()
@@ -17,7 +14,7 @@ die ()
 }
 
 read -r -d '' DOCKER_RUN <<EOF
-$(which docker) run --rm -p ${PORT_NUM}:80
+$(which docker) run --rm
   --env 'VIRTUAL_HOST=${DNS_NAME}'
   --env 'LETSENCRYPT_HOST=${DNS_NAME}'
   --env 'LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}'
@@ -42,7 +39,4 @@ ExecStop=$(which docker) stop -t 2 $CONTAINER_NAME
 WantedBy=local.target
 EOF
 
-mkdir -p "$SYSD_DIR"
-[ -d "$SYSD_DIR" ] || die "systemd directory $SYSD_DIR does not exist!"
-
-echo "$SERVICE_CONTENTS" > ${SYSD_DIR}/${SERVICE_FILE_DEST}
+echo "$SERVICE_CONTENTS" > ${SERVICE_FILE_DEST}

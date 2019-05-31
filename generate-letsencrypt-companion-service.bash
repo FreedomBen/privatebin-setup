@@ -3,8 +3,6 @@
 IMAGE_NAME=jrcs/letsencrypt-nginx-proxy-companion
 CONTAINER_NAME=nginx-proxy-letsencrypt
 
-#SYSD_DIR='/etc/systemd/system'
-SYSD_DIR='./'
 SERVICE_FILE_DEST='nginx-proxy-letsencrypt.service'
 
 die ()
@@ -16,9 +14,7 @@ die ()
 read -r -d '' DOCKER_RUN <<EOF
 $(which docker) run --rm 
   --volumes-from nginx-proxy
-  --volume 'nginx-vhost:/etc/nginx/vhost.d'
-  --volume 'nginx-html:/etc/nginx/html'
-  --volume '/var/run/docker.sock:/tmp/docker.sock:ro'
+  --volume '/var/run/docker.sock:/var/run/docker.sock:ro'
   --name $CONTAINER_NAME $IMAGE_NAME
 EOF
 # get rid of line breaks
@@ -39,7 +35,4 @@ ExecStop=$(which docker) stop -t 2 $CONTAINER_NAME
 WantedBy=local.target
 EOF
 
-mkdir -p "$SYSD_DIR"
-[ -d "$SYSD_DIR" ] || die "systemd directory $SYSD_DIR does not exist!"
-
-echo "$SERVICE_CONTENTS" > ${SYSD_DIR}/${SERVICE_FILE_DEST}
+echo "$SERVICE_CONTENTS" > ${SERVICE_FILE_DEST}
