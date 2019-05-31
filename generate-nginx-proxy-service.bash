@@ -17,7 +17,7 @@ $(which docker) run --rm
   --publish 443:443
   --volume 'nginx-certs:/etc/nginx/certs'
   --volume 'nginx-vhost:/etc/nginx/vhost.d'
-  --volume 'nginx-html:/etc/nginx/html'
+  --volume 'nginx-html:/usr/share/nginx/html
   --volume '/var/run/docker.sock:/tmp/docker.sock:ro'
   --name $CONTAINER_NAME $IMAGE_NAME
 EOF
