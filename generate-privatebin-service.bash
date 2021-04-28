@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-IMAGE_NAME=privatebin/nginx-fpm-alpine:1.2.1
+IMAGE_NAME=privatebin/nginx-fpm-alpine:1.3.5
 CONTAINER_NAME=privatebin
+
+# TODO:  Set these before use!
 DNS_NAME=privatebin.example.com
 LETSENCRYPT_EMAIL=freedomben@example.com
 
