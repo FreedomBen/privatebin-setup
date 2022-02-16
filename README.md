@@ -15,6 +15,7 @@ You need an internet facing VPS with:
 1.  _*Important:*_ Set the `DNS_NAME` and `LETSENCRYPT_EMAIL` variables appropriately in `generate-privatebin-service.bash`
 1.  Run each of the "generate..." scripts.  There are three.
 1.  Copy the generated \*.service files into the appropriate systemd directory (usually /etc/systemd/system)
+1.  Reload systemd files:  `systemctl daemon-reload`
 1.  Start the new services:
     1.  systemctl start privatebin
     1.  systemctl start nginx-proxy
