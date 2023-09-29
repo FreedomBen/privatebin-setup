@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-IMAGE_NAME=privatebin/nginx-fpm-alpine:1.3.5
+IMAGE_NAME=privatebin/nginx-fpm-alpine:1.5.2
+#IMAGE_NAME=privatebin/nginx-fpm-alpine:1.6.0
 CONTAINER_NAME=privatebin
 
 # TODO:  Set these before use!
